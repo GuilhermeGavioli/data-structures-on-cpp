@@ -27,11 +27,16 @@ public:
 
 class LinkedList{
 public:
-    Node *head = NULL;
+    Node* head = NULL;
+    Node* tail = NULL;
 
-    //LinkedList(){
-    //    
-    //}
+    LinkedList(){
+       
+    }
+
+    LinkedList(int* value){
+        head = new Node(*value);
+    }
 
     int add(Node* new_node){
         if (head == NULL){
@@ -39,6 +44,11 @@ public:
             return 0;
         }
         return add_recursive(head, new_node);
+    }
+
+    // add to the O(1) [instantly] by keeping track of the linked list tail
+    quick_add(){
+
     }
 
     int remove(){
