@@ -61,6 +61,9 @@ public:
         // int* curr_pos
     }
 
+    int invert(){
+        return invert_recursive(NULL, head);
+    }
 
     int print(){
         if (head == NULL){
@@ -118,6 +121,15 @@ private:
         return add_position_recursive(new_node, pos, prev, curr->next, curr_pos);
     }
 
+    int invert_recursive(Node* prev, Node* curr){
+        if (curr == NULL){
+            head = prev;
+            return 0;
+        }
+        Node *temp = curr->next;
+        curr->next = prev;
+        return invert_recursive(curr, temp);
+    }
 };
 
 
@@ -140,6 +152,9 @@ int main() {
     l.print();
     l.addPosition(n2, &pos2);
     l.print();
+    l.invert();
+    l.print();
+
 
     pause();
     return 0;
