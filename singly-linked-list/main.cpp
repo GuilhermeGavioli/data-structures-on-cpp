@@ -1,14 +1,8 @@
 #include <iostream>
+#include "../pause.h"
 
 
-static void pause(){
-    char keep_going = 'a';
-    while(true){
-        std::cin >> keep_going;
-        if (keep_going == 'q')
-            break;
-    }
-};
+
 
 class Node{
 public:
