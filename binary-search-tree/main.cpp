@@ -1,6 +1,7 @@
 #include <iostream>
+#include "../pause.h"
 
-//reference
+// reference
 //                             15
 //                           /    \ 
 //                         9       20
@@ -10,18 +11,9 @@
 //                 7           13          31 
 //
 //
-// inorder: LrR     =  
-// preorder: rLR    =  15  9  8  7  10  13  20  18  29  31
-// postorder: LRr   =
-
-static void pause(){
-    char keep_going = 'a';
-    while(true){
-        std::cin >> keep_going;
-        if (keep_going == 'q')
-            break;
-    }
-};
+// inorder: LrR     =   7  8   9  10  13  15  18  20  29  31
+// preorder: rLR    =  15  9   8   7  10  13  20  18  29  31
+// postorder: LRr   =   7  8  13  10   9  18  29  31  20  15
 
 
 class Node{
@@ -69,6 +61,20 @@ public:
         recursive_preorder_print(root);
     }
 
+    void printInOrder(){
+        if (root == nullptr){
+             return;
+        }
+        recursive_inorder_print(root);
+    }
+
+    void printPosOrder(){
+        if (root == nullptr){
+             return;
+        }
+        recursive_posorder_print(root);
+    }
+
     bool add(Node* node){
         if (root == nullptr){
             root = node;
@@ -97,6 +103,16 @@ private:
         }
     }
 
+    void recursive_inorder_print(Node* curr){
+        if (curr->left != nullptr){
+            recursive_inorder_print(curr->left);
+        } 
+        std::cout << "\n" << curr->value;
+        if (curr->right != nullptr){
+            recursive_inorder_print(curr->right);
+        }
+    }
+
     void recursive_preorder_print(Node* curr){
         std::cout << "\n" << curr->value;
         if (curr->left != nullptr){
@@ -106,13 +122,23 @@ private:
             recursive_preorder_print(curr->right);
         }
     }
+
+    void recursive_posorder_print(Node* curr){
+        if (curr->left != nullptr){
+            recursive_posorder_print(curr->left);
+        } 
+        if (curr->right != nullptr){
+            recursive_posorder_print(curr->right);
+        }
+        std::cout << "\n" << curr->value;
+    }
 };
 
 
 
 int main() {
 
-    // preorder =  15  9  8  7  10  13  20  18  29  31
+    // postorder =   7  8  13  10   9  18  29  31  20  15
     Node *root = new Node(15);
     Node *n1 = new Node(9);
     Node *n2 = new Node(8);
@@ -136,7 +162,7 @@ int main() {
     bst->add(n8);
     bst->add(n9);
 
-    bst->printPreOrder();
+    bst->printPosOrder();
 
     pause();
 
@@ -151,6 +177,7 @@ int main() {
     delete n7;
     delete n8;
     delete n9;
-    return 0;
+
+
     exit(0);
 }
