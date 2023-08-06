@@ -20,8 +20,10 @@ public:
     }
 
     ~Node(){
-        delete next;
-        delete this;
+        if (next){
+            delete next;
+            next = nullptr;
+        }
     }
 };
 
@@ -38,6 +40,17 @@ public:
         head = new Node(*value);
         tail = new Node(0);
         tail->next = head;
+    }
+    
+    ~LinkedList(){
+        if (head){
+            delete head;
+            head = nullptr;
+        }
+        if (tail){
+            delete tail;
+            tail = nullptr;
+        }
     }
 
     int add(Node* new_node){
@@ -61,6 +74,13 @@ public:
         return 0;
     }
 
+    // # Not possible (yet) - It would require the tail to be one address behind in the tail, seem that it needs to points / access the last but one node element.
+    // bool remove_quick(){
+    //     if (head == NULL){
+    //         return 0;
+    //     }
+    // }
+
     int remove(){
         if (head == NULL){
             return 0;
@@ -74,11 +94,6 @@ public:
         }
         int curr_pos = 0;
         add_position_recursive(node, pos, NULL, head, &curr_pos);
-        //  Node* new_node,
-        // int* pos,
-        // Node* prev,
-        // Node* curr,
-        // int* curr_pos
     }
 
     int invert(){
