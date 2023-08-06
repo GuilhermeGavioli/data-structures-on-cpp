@@ -7,6 +7,8 @@ static void pause(){
     while(true){
         std::cin >> keep_going;
         if (keep_going == QUIT)
-            exit(0);
+            // exit(0);
+            break;
+            // TODO: PASS FUNCTION TO FREE MEMORY AS CALLBACK
     }
 };
