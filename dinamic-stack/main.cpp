@@ -5,7 +5,7 @@ class Stack{
 public:
     int grow_type = 0; // 0 - Double   // 1 - Exponencial  // * - linear
     int max;
-    int* top;
+    int* top = nullptr;
     int size;
     int* data = new int[max];
 
